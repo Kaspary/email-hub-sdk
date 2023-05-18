@@ -26,7 +26,7 @@ class BaseEmailClient(ABC):
         return self
 
     @abstractmethod
-    def send_mail(self, to_addrs: str | Sequence[str], msg: str, from_addr: str = None):
+    def send_email(self, to_addrs: str | Sequence[str], msg: str, from_addr: str = None):
         pass
 
 
@@ -43,7 +43,7 @@ class GmailClient(BaseEmailClient):
         self._client.login(self._account, self._password)
         return self
 
-    def send_mail(
+    def send_email(
         self, to_addrs: str | Sequence[str], message: str, from_addr: str = None
     ):
         from_addr = from_addr or self._account
@@ -64,7 +64,7 @@ class OutlookClient(BaseEmailClient):
         self._client.login(self._account, self._password)
         return self
 
-    def send_mail(
+    def send_email(
         self, to_addrs: str | Sequence[str], message: str, from_addr: str = None
     ):
         from_addr = from_addr or self._account

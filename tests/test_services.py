@@ -1,20 +1,15 @@
 from unittest import mock
-from src.models import EmailMime
 from src.services import EmailService
 
 
 class TestEmailService:
-
     def setup_method(self):
         pass
 
-
-    @mock.patch("src.services.EmailService._mount_email")
-    def test_send_email(self, mount_email):
-
+    def test_send_email(self):
         mime_obj = mock.Mock()
-        mime_obj.as_string.return_value = 'EMAIL MESSAGE'
-        mount_email.return_value = mime_obj
+        mime_obj.as_string.return_value = "EMAIL MESSAGE"
+        mime_obj.recipients = ["example@email.com"]
 
         client_obj = mock.MagicMock()
         client_obj.__enter__.return_value = client_obj
@@ -24,18 +19,12 @@ class TestEmailService:
 
         service = EmailService(client_obj)
 
-        email_mime = EmailMime(
-            sender='sender_example@email.com',
-            subject='TESTE',
-            body='BODY',
-            to=['to_example@email.com'],
-            cc=['cc_example@email.com'],
-            bcc=['bcc_example@email.com'],
-        )
-        result = service.send_email(email_mime)
+        result = service.send_email(mime_obj)
 
         assert client_obj.__enter__.called_once
         assert client_obj.__exit__.called_once
         assert client_obj.smtp.called_once
-        assert client_obj.send_mail.called_once_with(email_mime.recipients, mime_obj.as_string.return_value)
-        assert result == None
+        assert client_obj.send_mail.called_once_with(
+            mime_obj.recipients, mime_obj.as_string.return_value
+        )
+        assert result is None

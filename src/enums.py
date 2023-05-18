@@ -1,8 +1,9 @@
 from enum import Enum
 
+
 class ServerSMTP(Enum):
-    GMAIL = 'smtp.gmail.com'
-    OUTLOOK = 'smtp-mail.outlook.com'
+    GMAIL = "smtp.gmail.com"
+    OUTLOOK = "smtp-mail.outlook.com"
 
 
 class PortSMTP(Enum):

@@ -6,8 +6,9 @@ SERVER_MOCK = "smtp.server.com"
 PORT_MOCK = "8888"
 ACCOUNT_MOCK = "account@email.com"
 PASSWORD_MOCK = "password1234"
-TO_MOCK = ['to_example@email.com']
-MESSAGE_MOCK = 'EMAIL MESSAGE'
+TO_MOCK = ["to_example@email.com"]
+MESSAGE_MOCK = "EMAIL MESSAGE"
+
 
 class TestBaseEmailClient:
     def setup_method(self):
@@ -24,7 +25,7 @@ class TestBaseEmailClient:
         assert self.client._port == PORT_MOCK
         assert self.client._account == ACCOUNT_MOCK
         assert self.client._password == PASSWORD_MOCK
-        assert self.client._client == None
+        assert self.client._client is None
 
     @mock.patch("src.clients.BaseEmailClient._client")
     @mock.patch("src.clients.BaseEmailClient.__enter__")
@@ -48,7 +49,7 @@ class TestGmailClient:
         assert self.client._port == PortSMTP.GMAIL.value
         assert self.client._account == ACCOUNT_MOCK
         assert self.client._password == PASSWORD_MOCK
-        assert self.client._client == None
+        assert self.client._client is None
 
     @mock.patch("src.clients.smtplib.SMTP_SSL")
     def test_smtp(self, smtp_mock):
@@ -62,13 +63,15 @@ class TestGmailClient:
     @mock.patch("src.clients.GmailClient._client")
     def test_send_mail(self, client_mock):
         client_mock.sendmail.return_value = None
-        result = self.client.send_mail(
+        result = self.client.send_email(
             to_addrs=TO_MOCK,
             message=MESSAGE_MOCK,
         )
 
-        assert result == None
-        assert client_mock.sendmail.called_once_with(ACCOUNT_MOCK, TO_MOCK, MESSAGE_MOCK)
+        assert result is None
+        assert client_mock.sendmail.called_once_with(
+            ACCOUNT_MOCK, TO_MOCK, MESSAGE_MOCK
+        )
 
 
 class TestOutlookClient:
@@ -80,7 +83,7 @@ class TestOutlookClient:
         assert self.client._port == PortSMTP.OUTLOOK.value
         assert self.client._account == ACCOUNT_MOCK
         assert self.client._password == PASSWORD_MOCK
-        assert self.client._client == None
+        assert self.client._client is None
 
     @mock.patch("src.clients.smtplib.SMTP")
     def test_smtp(self, smtp_mock):
@@ -96,10 +99,12 @@ class TestOutlookClient:
     @mock.patch("src.clients.OutlookClient._client")
     def test_send_mail(self, client_mock):
         client_mock.sendmail.return_value = None
-        result = self.client.send_mail(
+        result = self.client.send_email(
             to_addrs=TO_MOCK,
             message=MESSAGE_MOCK,
         )
 
-        assert result == None
-        assert client_mock.sendmail.called_once_with(ACCOUNT_MOCK, TO_MOCK, MESSAGE_MOCK)
+        assert result is None
+        assert client_mock.sendmail.called_once_with(
+            ACCOUNT_MOCK, TO_MOCK, MESSAGE_MOCK
+        )
