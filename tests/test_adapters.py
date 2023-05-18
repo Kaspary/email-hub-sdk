@@ -52,24 +52,27 @@ class TestEmailMIMEAdapter:
         payload = self.adapter.get_payload()
 
         assert mime_text_mock.called_once_with(BODY_MOCK)
-        assert set_attatchment_mock.called_once_with(*ATTATCHMENTS_MOCK)
+        assert set_attatchment_mock.called_once_with(*ATTATCHMENTS_MOCK[0])
         assert attach_mock.called_once_with(mime_text_mock)
         assert isinstance(payload, list)
         assert len(payload) == 0
 
     @mock.patch("src.adapters.EmailMIMEAdapter.attach")
     @mock.patch("src.adapters.MIMEBase")
-    def test_as_string(self, mime_base_mock, attach_mock):
+    def test_set_attatchment(self, mime_base_mock, attach_mock):
         attach_mock.return_value = None
         mime_base_mock.set_payload.return_value = None
         mime_base_mock.add_header.return_value = None
 
-        self.adapter.get_payload()
+        attatchment_data = b''
+        attatchment_filename = 'filename.txt'
+
+        self.adapter._EmailMIMEAdapter__set_attatchment(attatchment_data, attatchment_filename)
 
         assert mime_base_mock.called_once_with("application", "octet-stream")
-        assert mime_base_mock.set_payload.called_once_with(ATTATCHMENTS_MOCK[0][0])
+        assert mime_base_mock.set_payload.called_once_with(attatchment_data)
         assert mime_base_mock.add_header.called_once_with(
-            "Content-Disposition", f"attachment; filename={ATTATCHMENTS_MOCK[0][1]}"
+            "Content-Disposition", f"attachment; filename={attatchment_filename}"
         )
         assert attach_mock.called_once_with(mime_base_mock)
 
