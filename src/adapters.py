@@ -39,6 +39,8 @@ class EmailMIMEAdapter(MIMEMultipart):
         assert isinstance(
             value, (str, tuple)
         ), f"sender expect string or tuple of strings type, but got {type(value)}"
+
+        del self["From"]
         if isinstance(value, str):
             self["From"] = value
         elif isinstance(value, tuple):
@@ -53,6 +55,7 @@ class EmailMIMEAdapter(MIMEMultipart):
         assert isinstance(
             value, str
         ), f"subject expect string type, but got {type(value)}"
+        del self["Subject"]
         self["Subject"] = value
 
     @property
@@ -64,6 +67,7 @@ class EmailMIMEAdapter(MIMEMultipart):
         assert isinstance(
             value, list
         ), f"to expect list of strings type, but got {type(value)}"
+        del self["To"]
         self["To"] = COMMASPACE.join(value)
 
     @property
@@ -75,6 +79,7 @@ class EmailMIMEAdapter(MIMEMultipart):
         assert isinstance(
             value, list
         ), f"cc expect list of strings type, but got {type(value)}"
+        del self["Cc"]
         self["Cc"] = COMMASPACE.join(value)
 
     @property
@@ -84,6 +89,7 @@ class EmailMIMEAdapter(MIMEMultipart):
     @bcc.setter
     def bcc(self, value: list[str]):
         assert isinstance(value, list), f"bcc expect a list type, but got {type(value)}"
+        del self["Bcc"]
         self["Bcc"] = COMMASPACE.join(value)
 
     @property
