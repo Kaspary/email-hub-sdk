@@ -27,8 +27,8 @@ class TestBaseEmailClient:
         assert self.client._password == PASSWORD_MOCK
         assert self.client._client is None
 
-    @mock.patch("src.clients.BaseEmailClient._client")
-    @mock.patch("src.clients.BaseEmailClient.__enter__")
+    @mock.patch("email_hub_sdk.clients.BaseEmailClient._client")
+    @mock.patch("email_hub_sdk.clients.BaseEmailClient.__enter__")
     def test_the_with_statement(self, enter_mock, client_mock):
         enter_mock.return_value = self.client
         client_mock.close.return_value = None
@@ -51,7 +51,7 @@ class TestGmailClient:
         assert self.client._password == PASSWORD_MOCK
         assert self.client._client is None
 
-    @mock.patch("src.clients.smtplib.SMTP_SSL")
+    @mock.patch("email_hub_sdk.clients.smtplib.SMTP_SSL")
     def test_smtp(self, smtp_mock):
         smtp_mock.login.return_value = None
 
@@ -60,7 +60,7 @@ class TestGmailClient:
         assert smtp_mock.called_once_with(ServerSMTP.GMAIL.value, PortSMTP.GMAIL.value)
         assert smtp_mock.login.called_once_with(ACCOUNT_MOCK, PASSWORD_MOCK)
 
-    @mock.patch("src.clients.GmailClient._client")
+    @mock.patch("email_hub_sdk.clients.GmailClient._client")
     def test_send_mail(self, client_mock):
         client_mock.sendmail.return_value = None
         result = self.client.send_email(
@@ -85,7 +85,7 @@ class TestOutlookClient:
         assert self.client._password == PASSWORD_MOCK
         assert self.client._client is None
 
-    @mock.patch("src.clients.smtplib.SMTP")
+    @mock.patch("email_hub_sdk.clients.smtplib.SMTP")
     def test_smtp(self, smtp_mock):
         smtp_mock.login.return_value = None
         smtp_mock.starttls.return_value = None
@@ -96,7 +96,7 @@ class TestOutlookClient:
         assert smtp_mock.login.called_once_with(ACCOUNT_MOCK, PASSWORD_MOCK)
         assert smtp_mock.starttls.called_once
 
-    @mock.patch("src.clients.OutlookClient._client")
+    @mock.patch("email_hub_sdk.clients.OutlookClient._client")
     def test_send_mail(self, client_mock):
         client_mock.sendmail.return_value = None
         result = self.client.send_email(

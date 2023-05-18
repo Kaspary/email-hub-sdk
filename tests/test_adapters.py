@@ -42,9 +42,9 @@ class TestEmailMIMEAdapter:
         assert sender_name in self.adapter.sender
         assert sender_email in self.adapter.sender
 
-    @mock.patch("src.adapters.EmailMIMEAdapter.attach")
-    @mock.patch("src.adapters.EmailMIMEAdapter._EmailMIMEAdapter__set_attatchment")
-    @mock.patch("src.adapters.MIMEText")
+    @mock.patch("email_hub_sdk.adapters.EmailMIMEAdapter.attach")
+    @mock.patch("email_hub_sdk.adapters.EmailMIMEAdapter._EmailMIMEAdapter__set_attatchment")
+    @mock.patch("email_hub_sdk.adapters.MIMEText")
     def test_as_string(self, mime_text_mock, set_attatchment_mock, attach_mock):
         set_attatchment_mock.return_value = None
         attach_mock.return_value = None
@@ -57,8 +57,8 @@ class TestEmailMIMEAdapter:
         assert isinstance(payload, list)
         assert len(payload) == 0
 
-    @mock.patch("src.adapters.EmailMIMEAdapter.attach")
-    @mock.patch("src.adapters.MIMEBase")
+    @mock.patch("email_hub_sdk.adapters.EmailMIMEAdapter.attach")
+    @mock.patch("email_hub_sdk.adapters.MIMEBase")
     def test_set_attatchment(self, mime_base_mock, attach_mock):
         attach_mock.return_value = None
         mime_base_mock.set_payload.return_value = None

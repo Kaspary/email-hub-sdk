@@ -12,8 +12,8 @@ BCC_ADDRS_MOCK = ["bcc_example@email.com"]
 ATTATCHMENTS_MOCK = [(b"", "filename.txt")]
 
 
-@mock.patch("src.facades.GmailClient")
-@mock.patch("src.facades.send_email")
+@mock.patch("email_hub_sdk.facades.GmailClient")
+@mock.patch("email_hub_sdk.facades.send_email")
 def test_send_email_with_gmail(send_email_mock, gmail_client_mock):
     send_email_with_gmail(
         account=ACCOUNT_MOCK,
@@ -38,8 +38,8 @@ def test_send_email_with_gmail(send_email_mock, gmail_client_mock):
     assert gmail_client_mock.called_once_with(ACCOUNT_MOCK, PASSWORD_MOCK)
 
 
-@mock.patch("src.facades.OutlookClient")
-@mock.patch("src.facades.send_email")
+@mock.patch("email_hub_sdk.facades.OutlookClient")
+@mock.patch("email_hub_sdk.facades.send_email")
 def test_send_email_with_outlook(send_email_mock, outlook_client_mock):
     send_email_with_outlook(
         account=ACCOUNT_MOCK,
@@ -64,8 +64,8 @@ def test_send_email_with_outlook(send_email_mock, outlook_client_mock):
     assert outlook_client_mock.called_once_with(ACCOUNT_MOCK, PASSWORD_MOCK)
 
 
-@mock.patch("src.facades.EmailMIMEAdapter")
-@mock.patch("src.facades.EmailService")
+@mock.patch("email_hub_sdk.facades.EmailMIMEAdapter")
+@mock.patch("email_hub_sdk.facades.EmailService")
 def test_send_email(email_mime_mock, email_service_mock):
     client_obj = mock.Mock()
     send_email(
