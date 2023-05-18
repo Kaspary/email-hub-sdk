@@ -11,6 +11,59 @@
 
 
 # Email SDK Hub
+This is a project for implementing an interface to send emails with different servers.
 
-This is a project for implement an interface to send email with different emails server.
+## Install
+Do you can install this project directly in yor project. To do this, follow the next step.
+```bash
+pip install git+https://github.com/Kaspary/email-hub-sdk.git
+```
 
+## Local Usage
+
+### Requirements
+- Python 3.7 or more.
+- Virual Envorniment Python (Recomended).
+- Make (optional). 
+
+### Commands
+To make easy startup of the project, the common commands were configurated in the `makefile`.
+
+#### Example
+To create the virtual environment, execute the following command.
+```bash
+make create-venv
+```
+
+**Commands**
+* `create-venv` - Create the virtual environment for the project (the module **venv** is necessary).
+* `setup` - Install the requirements from **requirements.txt**.
+* `clean` - Remove all temporary files from the project, including the coverage folder.
+* `code-convention` - Execute the tools to verify the code convention.
+* `test` - Run all the tests of the project.
+* `test-cov` - Generate the test coverage report.
+
+## Project layout
+
+```
+.
+├── Makefile
+├── README.md
+├── reports
+│   └── coverage
+├── setup.cfg
+├── setup.py
+├── src
+│   ├── adapters.py
+│   ├── clients.py
+│   ├── enums.py
+│   ├── facades.py
+│   ├── __init__.py
+│   └── services.py
+└── tests
+    ├── __init__.py
+    ├── test_adapters.py
+    ├── test_clients.py
+    ├── test_facades.py
+    └── test_services.py
+```
