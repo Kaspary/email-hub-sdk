@@ -1,7 +1,7 @@
 import logging
-from src.adapters import EmailMIMEAdapter
+from email_hub_sdk.adapters import EmailMIMEAdapter
 
-from src.clients import BaseEmailClient
+from email_hub_sdk.clients import BaseEmailClient
 
 
 class EmailService:

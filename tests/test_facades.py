@@ -1,5 +1,5 @@
 from unittest import mock
-from src.facades import send_email, send_email_with_gmail, send_email_with_outlook
+from email_hub_sdk.facades import send_email, send_email_with_gmail, send_email_with_outlook
 
 ACCOUNT_MOCK = "account@email.com"
 PASSWORD_MOCK = "password"

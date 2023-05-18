@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import smtplib
 from typing import Sequence
 
-from src.enums import PortSMTP, ServerSMTP
+from email_hub_sdk.enums import PortSMTP, ServerSMTP
 
 
 class BaseEmailClient(ABC):

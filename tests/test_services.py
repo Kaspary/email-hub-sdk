@@ -1,5 +1,5 @@
 from unittest import mock
-from src.services import EmailService
+from email_hub_sdk.services import EmailService
 
 
 class TestEmailService:

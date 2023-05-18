@@ -14,6 +14,6 @@ setuptools.setup(
     url="https://github.com/Kaspary/email-hub-sdk",
     project_urls={"Bug Tracker": "https://github.com/Kaspary/email-hub-sdk/issues"},
     license="UNLICENSED",
-    packages=["email-hub-sdk"],
+    packages=["email_hub_sdk"],
     install_requires=[],
 )

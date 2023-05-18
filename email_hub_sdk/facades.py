@@ -1,6 +1,6 @@
-from src.adapters import EmailMIMEAdapter
-from src.services import EmailService
-from src.clients import BaseEmailClient, GmailClient, OutlookClient
+from email_hub_sdk.adapters import EmailMIMEAdapter
+from email_hub_sdk.services import EmailService
+from email_hub_sdk.clients import BaseEmailClient, GmailClient, OutlookClient
 
 
 def send_email_with_gmail(

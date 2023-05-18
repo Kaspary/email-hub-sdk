@@ -1,7 +1,7 @@
 from unittest import mock
 
 import pytest
-from src.adapters import EmailMIMEAdapter
+from email_hub_sdk.adapters import EmailMIMEAdapter
 
 SENDER_MOCK = "sender@email.com"
 SUBJECT_MOCK = "Email Title"

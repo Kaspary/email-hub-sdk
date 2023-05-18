@@ -1,6 +1,6 @@
 from unittest import mock
-from src.clients import BaseEmailClient, GmailClient, OutlookClient
-from src.enums import PortSMTP, ServerSMTP
+from email_hub_sdk.clients import BaseEmailClient, GmailClient, OutlookClient
+from email_hub_sdk.enums import PortSMTP, ServerSMTP
 
 SERVER_MOCK = "smtp.server.com"
 PORT_MOCK = "8888"
