@@ -60,7 +60,7 @@ class EmailMIMEAdapter(MIMEMultipart):
 
     @property
     def to(self):
-        return self["To"].split(COMMASPACE)
+        return self["To"].split(COMMASPACE) or []
 
     @to.setter
     def to(self, value: list[str]):
@@ -72,7 +72,7 @@ class EmailMIMEAdapter(MIMEMultipart):
 
     @property
     def cc(self):
-        return self["Cc"].split(COMMASPACE)
+        return self["Cc"].split(COMMASPACE) or []
 
     @cc.setter
     def cc(self, value: list[str]):
@@ -84,7 +84,7 @@ class EmailMIMEAdapter(MIMEMultipart):
 
     @property
     def bcc(self):
-        return self["Bcc"].split(COMMASPACE)
+        return self["Bcc"].split(COMMASPACE) or []
 
     @bcc.setter
     def bcc(self, value: list[str]):
